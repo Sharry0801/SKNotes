@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+    <title>{% block title %}{% endblock title %} | NotepadSK</title>
+  </head>
+  <style>
+    title{
+      font-family: 'Times New Roman', Times, serif;
+      font-style: italic;
+    }
+  </style>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark">
+        <style>
+          nav{
+            background-color: black;
+          }
+        </style>
+      <div class="container-fluid">
+        <a class="navbar-brand" href=""><img src="https://th.bing.com/th/id/R.a4ce19cceaae768dadac7795a211e677?rik=RJZ6e%2bIQrZTU%2bg&riu=http%3a%2f%2fi.imgur.com%2fhgqyOOZ.png&ehk=MVwKByFfYVSSb6njNHK1Yqr%2fGOxJcYXtNRAt0tJtNOs%3d&risl=&pid=ImgRaw&r=0&sres=1&sresct=1"height="40"width="40"><i><b>Notepad</b></i><i>SK</i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+            </li>
+            <form class="form-inline">
+              <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-sm-0" type="submit">Search</button>
+            </form>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/sign-up">SignUp</a>
+            </li>
+            {% endif %}
+          </ul>
+          
+          
+          <style></style>
+          </div>
+        </div>
+   </nav>
+  </header>
+  <style>
+    body {
+      background-image: url("https://images.pexels.com/photos/317356/pexels-photo-317356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+      background-position: 100% 100%;
+      background-repeat: repeat;
+      position: relative;
+    }
+    main {
+      min-height: calc(100vh - 90px - 58px);
+    }
+    </style>
+    <main>
+    
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category , message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button></div>
+          {% else %}
+          <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
+      <div class="container">{% block content %}{% endblock content %}</div>
+    </main>
+      
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-bottom">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+            </a>
+            <span class="text-muted">&copy; <b><i>Notepad</b>SK</i>@IndustrialProject</span>
+          </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+          </ul>
+        </footer>
+        <style>
+              footer{
+                text-align: center;
+                background-color:black;
+                color: rgb(255, 255, 255);
+                padding: 20px;
+                position: absolute;
+                /* bottom: 0; */
+                width: 100%;
+              }
+              *{
+                margin: 0;
+              }
+        </style>
+      </div>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='index.js') }}"
+    ></script>
+    
+  </body>
+</html>
